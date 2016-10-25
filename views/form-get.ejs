@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Payment</title>
+	<style type="text/css">
+		html{
+	background-color: #7cb342;
+	font-family: georgia;
+}
+.layout{
+	position: absolute;
+	left: 200px;
+	top: 100px;
+}
+.set{
+	margin-top: 5px;
+	border: 1px solid white;
+	padding:20px;
+	border-radius: 10px;
+	width: 1000px;
+	background-color: #9ccc65;
+}
+.left{
+	position: absolute;
+	left: 400px;
+	width: 500px;
+	height: 25px;
+	border-radius: 5px;
+}
+.butt{
+	background-color: black;
+	color: white;
+	border-radius: 50px;
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	margin-left: 500px;
+}
+.text{
+	position: absolute;
+	left: 400px;
+	width: 500px;
+	border-radius: 5px;
+}
+.area{
+	margin-top: 5px;
+	border: 1px solid white;
+	padding:20px;
+	border-radius: 10px;
+	width: 1000px;
+	background-color: #9ccc65;
+	height: 70px;
+}
+	</style>
+	<script type="text/javascript" >
+		function validate(){ 
+	var nam=document.form.name.value;
+	var reg=/^[a-zA-Z]*$/;
+	var cap=/^[A-Z]/;
+	var small=/.[a-z]/;
+	var num=/^\d*$/;
+	var add=document.form.address.value;
+	var card=document.form.cardNumber.value;
+	var format=/^\d{4}(\-\d{4}){3}$/;
+	var orfor=/^\d{16}$/;
+	if(nam==''){
+		alert('Please fill your name');
+		return false;
+	}
+	arr=nam.split(' ');
+	if(arr.length!=2 || arr[1]==''){
+		alert('Please fill your firstname and lastname');
+		return false;
+	}
+	if(!arr[0].match(reg) || !arr[1].match(reg)){
+		alert('Name should have alphabets only');
+		return false;
+	}
+	if (!arr[0].match(cap)) {
+		alert('Firstname should start with capital letter');
+		return false;
+	}
+	if (!arr[1].match(cap)) {
+		alert('Lastname should start with capital letter');
+		return false;
+	}
+	if(!arr[0].match(small)){
+		alert('Firstname should be followed a small letter');
+		return false;
+	}
+	if(!arr[1].match(small)){
+		alert('Lastname should be followed a small letter');
+		return false;
+	}
+	if(add=='' | add==null){
+		alert('Please enter the address');
+		return false;
+	}
+	arr1=add.split(' ');
+	if(!arr1[0].match(num)){
+		alert('Address should start with number');
+		return false;
+	}
+	var arr2=[];
+	for (var i = 1; i < arr1.length; i++)
+		if(arr1[i].length>0)
+			arr2.push(arr1[i]);
+	if(!arr2.length){
+		alert('Please enter the Streetname');
+		return false;
+	}
+	var cou=0;
+	for (var i = 0; i < arr2.length; i++) {
+		if(!arr2[i].match(reg)){
+			alert('Streetname should have alphabets only');
+			return false;
+		}			
+		if(!arr2[i].match(cap) && cou==0){
+				alert('Streetname should start with capital letter');
+				return false;
+		}
+		else if(arr2[i].match(cap) && cou==1){
+			cou=0;
+
+		}
+		else
+			cou=1;
+	}
+	if(card==''){
+		alert('Please enter the Card no.');
+		return false;
+	}
+	if (!card.match(format) && !card.match(orfor)) {
+		alert('Invalid card number');
+		return false;
+	}
+	return true;
+}
+	</script>
+</head>
+<body>
+	<div class="layout">
+		Step 1: Your details
+		<form action="/submitForm" name="form" onsubmit="return validate()" method="GET">
+			<div class="set">Name<input type="text" name="name" class='left' placeholder=" First and last name" value=""></div>
+			<div class="set">Email<input type="text" name="email" class='left' placeholder=" example@domain.com"></div>
+			<div class="set">Phone<input type="text" name="phone" class='left' placeholder=" Eg: +447500000000"></div><br>
+			Step 2: Delivery address<br>
+			<div class="area">Address<textarea rows="5" class="text" name="address"></textarea></div>
+			<div class="set">Post code<input type="text" class='left' name="zipcode"></div>
+			<div class="set">Country<input type="text" class='left' name="country"></div><br>
+			Step 3: Card details<br>
+			<div class="set">Card type<br><br>
+			<input type="radio" name="cardType" value="visa">VISA&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cardType" value="amex">AmEx&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cardType" value="masterCard">Mastercard</div>
+			<div class="set">Cardnumber<input type="text" class='left' name="cardNumber"></div>
+			<div class="set">Security code<input type="text" class='left' name="cvv"></div>
+			<div class="set">Name on card<input type="text" class='left' name="nameOnTheCard" placeholder=" Exact name as on the card"></div><br>
+
+
+			<input type="submit" class='butt' value="BUY IT!">
+		</form>
+	</div>
+</body>
+</html>

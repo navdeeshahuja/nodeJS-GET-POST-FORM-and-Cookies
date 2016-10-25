@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+      function validate()
+      {
+        if(document.getElementById('username').value=="")
+        {
+          alert('Type a username');
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h3>No cookies Stored</h3>
+    <form action="/ques2/setCookie" method="POST">
+    Username: <input type="text" name="username" id="username"><br>
+    <input type="submit" name="SUBMIT" onclick="return validate()">
+    </form>
+  </body>
+</html>
