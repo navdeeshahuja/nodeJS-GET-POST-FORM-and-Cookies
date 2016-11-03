@@ -2,6 +2,10 @@
 
 This is the nodeJS app that handles the user cookies, and also handles the form data received by GET and POSt method.
 
+## Tests
+
+Fully Tested and hosted on http://vitwebtech.herokuapp.com/
+
 ## Installation
 
 Download or clone the repo in your local folder,
